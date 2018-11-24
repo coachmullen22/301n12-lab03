@@ -46,7 +46,8 @@ Creature.prototype.rendOption = function() {
   }
 }
 
-//select box filtering
+// Event Handlers
+//  select box filtering
 $('select[name="keyword"]').on('change',function(){
   let $selection = $(this).val();
   console.log($(this).val());
@@ -54,12 +55,11 @@ $('select[name="keyword"]').on('change',function(){
   $(`div[id="${$selection}"]`).show()
   console.log($selection);
 })
-// $('select[name="icecream"]').on('change', function() {
-//   let $selection = $(this).val();
-//   $('img').hide()
-//   $(`img[data-flavor="${$selection}"]`).show()
-// })
 
+$('button[id="P1"]').on('click', function(){
+  $('main div').hide()
+  console.log('hiding!');
+})
 
 function readJson () {
   $.get('data/page-1.json', 'json')
@@ -74,8 +74,13 @@ function readJson () {
         creature.rendOption();
       })
     })
-    
-
+  // get page-2.json
+  $.get('data/page-2.json', 'json')
+    .then(data => {
+      data.forEach(creatureCrit => {
+        new Creature(creatureCrit)
+      })
+    })
 }
 
 $(() => readJson());
