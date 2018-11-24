@@ -2,6 +2,7 @@
 
 // global vars
 const allCrits = [];
+const uniqueKeys = [];
 
 // crit = critter
 // constructors
@@ -34,12 +35,15 @@ Creature.prototype.render = function() {
 // this prototype populates the dropdown and removes and inputs keywords only once.
 // 11/23 ... working on the 'input only once' part.
 Creature.prototype.rendOption = function() {
-  $('select').append('<option class="drop">'+this.keyword+'</option>');
-  let $drop = $('option[class="drop"]');
-  $drop.attr('value', this.keyword);
+  if(uniqueKeys.indexOf(this.keyword) === -1){
+    $('select').append('<option class="drop">'+this.keyword+'</option>');
+    let $drop = $('option[class="drop"]');
+    $drop.attr('value', this.keyword);
 
-  $drop.removeClass('drop');
-  $drop.attr('id', this.keyword);
+    $drop.removeClass('drop');
+    $drop.attr('id', this.keyword);
+    uniqueKeys.push(this.keyword);
+  }
 }
 
 //select box filtering
