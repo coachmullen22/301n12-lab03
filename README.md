@@ -13,14 +13,14 @@ Description: Continue working on Lab-02 and add more features to it, like adding
 
 ###Number and name of feature: Feature 3-1, Pagination
 Estimate of time needed to complete: 1 hr?
-Start time: _____
-Finish time: _____
-Actual time needed to complete: _____
+Start time: 2:50
+Finish time: 4:45
+Actual time needed to complete: 1hr 55min
 
 
 ###Number and name of feature: Feature 3-2, Templating
-Estimate of time needed to complete: _____
-Start time: _____
+Estimate of time needed to complete: 1 hr?
+Start time: 4:50
 Finish time: _____
 Actual time needed to complete: _____
 

@@ -47,6 +47,9 @@ Creature.prototype.rendOption = function() {
   }
 }
 
+
+
+
 // Event Handlers
 //  select box filtering
 $('select[name="keyword"]').on('change',function(){
@@ -72,7 +75,7 @@ $('button[class="P2"]').on('click', function(){
 })
 
 function readJson () {
-  $.get('data/page-1.json', 'json')
+  return $.get('data/page-1.json', 'json')
     .then(data => {
       data.forEach(creatureCrit => {
         new Creature(creatureCrit)
@@ -106,4 +109,26 @@ function page2Go (data) {
     })
 }
 
-$(() => readJson());
+$(() => readJson()
+  .then(function () {
+    // grab the template script
+    console.log('go for handlebar')
+    let tempScript = $('#testingTemplate').html();
+
+    // compile the template
+    let theTemp = Handlebars.compile(tempScript);
+
+    // define the data object
+    let context =  allCrits[0];
+      //{} 'image_url': 'https://images.vat19.com/covers/large/tricerataco-taco-holder.jpg',
+      // 'title': 'Unicron',
+      // 'description': 'loren ipsum test test text whatever there.'};
+
+
+    // pass our data to the template
+    let theCompiled = theTemp(context);
+    // add the compiled html to the page
+    $('.content-placeholder').html(theCompiled);
+
+    console.log('handlebar test complete!')
+  }))
