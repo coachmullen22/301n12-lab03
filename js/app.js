@@ -14,7 +14,7 @@ function Creature(crit){
   this.horns = crit.horns;
 
   allCrits.push(this);
-  console.log(allCrits);
+  // console.log(allCrits);
 }
 
 Creature.prototype.render = function() {
@@ -22,6 +22,7 @@ Creature.prototype.render = function() {
   let $clone = $('div[class="clone"]');
 
   let creatureTemplate = $('#photo-template').html();
+  // make a while loop that iterates on making divs until allCrits[19].
   $clone.html(creatureTemplate);
 
   $clone.find('h2').text(this.title);
@@ -46,7 +47,8 @@ Creature.prototype.rendOption = function() {
   }
 }
 
-//select box filtering
+// Event Handlers
+//  select box filtering
 $('select[name="keyword"]').on('change',function(){
   let $selection = $(this).val();
   console.log($(this).val());
@@ -54,15 +56,43 @@ $('select[name="keyword"]').on('change',function(){
   $(`div[id="${$selection}"]`).show()
   console.log($selection);
 })
-// $('select[name="icecream"]').on('change', function() {
-//   let $selection = $(this).val();
-//   $('img').hide()
-//   $(`img[data-flavor="${$selection}"]`).show()
-// })
 
+//button 1 + page 1 recall
+$('button[class="P1"]').on('click', function(){
+  $('main div').hide()
+  allCrits.length = 0;
+  readJson();
+})
+
+//button 2 + page 2 function call
+$('button[class="P2"]').on('click', function(){
+  $('main div').hide()
+  allCrits.length = 0;
+  page2Go('data/page-2.json');
+})
 
 function readJson () {
   $.get('data/page-1.json', 'json')
+    .then(data => {
+      data.forEach(creatureCrit => {
+        new Creature(creatureCrit)
+      })
+    })
+    .then(() => {
+    // convert forEach to for?
+      // function() (creature) {
+      // for (var i=0; i<19; i++){
+      allCrits.forEach(creature => {
+        creature.render();
+        creature.rendOption();
+      })
+    })
+}
+// get page-2.json
+
+function page2Go (data) {
+  $.get(data, 'json')
+  //could pass parameter through function -Ix showed us how to do this way as well; keeping both methods here for learning purposes.
     .then(data => {
       data.forEach(creatureCrit => {
         new Creature(creatureCrit)
@@ -74,8 +104,6 @@ function readJson () {
         creature.rendOption();
       })
     })
-    
-
 }
 
 $(() => readJson());
