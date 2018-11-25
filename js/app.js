@@ -14,7 +14,7 @@ function Creature(crit){
   this.horns = crit.horns;
 
   allCrits.push(this);
-  console.log(allCrits);
+  // console.log(allCrits);
 }
 
 Creature.prototype.render = function() {
@@ -22,6 +22,7 @@ Creature.prototype.render = function() {
   let $clone = $('div[class="clone"]');
 
   let creatureTemplate = $('#photo-template').html();
+  // make a while loop that iterates on making divs until allCrits[19].
   $clone.html(creatureTemplate);
 
   $clone.find('h2').text(this.title);
@@ -56,9 +57,18 @@ $('select[name="keyword"]').on('change',function(){
   console.log($selection);
 })
 
-$('button[id="P1"]').on('click', function(){
+//button 1 + page 1 recall
+$('button[class="P1"]').on('click', function(){
   $('main div').hide()
-  console.log('hiding!');
+  allCrits.length = 0;
+  readJson();
+})
+
+//button 2 + page 2 function call
+$('button[class="P2"]').on('click', function(){
+  $('main div').hide()
+  allCrits.length = 0;
+  page2Go('data/page-2.json');
 })
 
 function readJson () {
@@ -69,16 +79,29 @@ function readJson () {
       })
     })
     .then(() => {
+    // convert forEach to for?
+      // function() (creature) {
+      // for (var i=0; i<19; i++){
       allCrits.forEach(creature => {
         creature.render();
         creature.rendOption();
       })
     })
-  // get page-2.json
-  $.get('data/page-2.json', 'json')
+}
+// get page-2.json
+
+function page2Go (data) {
+  $.get(data, 'json')
+  //could pass parameter through function -Ix showed us how to do this way as well; keeping both methods here for learning purposes.
     .then(data => {
       data.forEach(creatureCrit => {
         new Creature(creatureCrit)
+      })
+    })
+    .then(() => {
+      allCrits.forEach(creature => {
+        creature.render();
+        creature.rendOption();
       })
     })
 }
