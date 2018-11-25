@@ -17,22 +17,22 @@
       <button type="button" class="P1">Page 1</button>
       <button type="button" class="P2">Page 2</button>
     </header>
-    <section id="photo-template">
-      <h2 id="title"></h2>
-      <img id="image_url" src="" alt="">
-      <p id="description"></p>
-    </section>
-
-    <script id="testingTemplate" type="text/x-handlebars-template">
-      <aside id="test">
-        <img src="{{image_url}}">
+    <!-- <section id="photo-template">
+        {{{image_url}}}
         <h2>{{title}}</h2>
-        <p>{{description}}</p>
-      </aside>
+          <p>{{description}}</p>
+      </section> -->
+  
+
+    <script id="template" type="text/x-handlebars-template">
+      <main id="photo-template">
+        {{{image_url}}}
+        <h2>{{title}}</h2>
+          <p>{{description}}</p>
+      </main>  
     </script>
+
     <p class="content-placeholder"></p>
-    <main>
-    </main>
     <footer>
       &copy; 2018 Code Fellows
     </footer>
