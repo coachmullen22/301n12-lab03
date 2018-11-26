@@ -10,7 +10,7 @@ function Creature(crit){
   this.title = crit.title;
   this.image_url = `<img src="${crit.image_url}">`;
   this.description = crit.description;
-  this.keyword = `class ="${crit.keyword}"`;
+  this.keyword = crit.keyword;
   this.horns = crit.horns;
 
   allCrits.push(this);
@@ -34,19 +34,37 @@ Creature.prototype.render = function() {
 }
 
 Creature.prototype.rendAsHandle = function () {
-  $('main').append('<div class="clone"></div>');
-  let $clone = $('div[class="clone"]');
+  console.log('go for handlebar')
+  // grab the template script
+  let tempScript = $('#template').html();
 
-  let creatureTemplate = $('#photo-template').html();
+  // compile the template
+  let theTemp = Handlebars.compile(tempScript);
 
-  $clone.html(creatureTemplate);
+  // define the data object -likely use for or forEach to iterate through allCrits array, though here we're just calling allCrits.rendAsHandle()
+  let context =  theTemp(this);
+  return context;
+  // // pass our data to the template
+  // let theCompiled = theTemp(context);
+  // // add the compiled html to the page
+  // $('.content-placeholder').html(theCompiled);
 
-  $clone.find('img').attr('src', this.image_url)
-  $clone.find('h2').text('title');
-  $clone.find('p').text('{{description}}');
+  console.log('handlebar complete!')
+  
+  // building html for each i in allCrits
+  // $('main').append('<div class="clone"></div>');
+  // let $clone = $('div[class="clone"]');
 
-  $clone.removeClass('clone');
-  $clone.attr('class', this.title).attr('id', this.keyword)
+  // let creatureTemplate = $('#photo-template').html();
+
+  // $clone.html(creatureTemplate).append(this.image_url);
+
+  // // $clone.find('').attr('src', this.image_url)
+  // $clone.find('h2').text('{{title}}');
+  // $clone.find('p').text('{{description}}');
+
+  // $clone.removeClass('clone');
+  // $clone.attr('class', this.title).attr('id', this.keyword)
 }
 
 // this prototype populates the dropdown and removes and inputs keywords only once.
@@ -99,7 +117,7 @@ function readJson () {
       // function() (creature) {
       // for (var i=0; i<19; i++){
       allCrits.forEach(creature => {
-        creature.rendAsHandle();
+        creature.rendAsHandle(allCrits);
         creature.rendOption();
       })
     })
@@ -122,26 +140,4 @@ function page2Go (data) {
     })
 }
 
-$(() => readJson()
-  .then(function () {
-    // grab the template script
-    console.log('go for handlebar')
-    let tempScript = $('#template').html();
-
-    // compile the template
-    let theTemp = Handlebars.compile(tempScript);
-
-    // define the data object -likely use for or forEach to iterate through allCrits array, though here we're just calling allCrits.rendAsHandle()
-    let context =  allCrits[0];
-      //{} 'image_url': 'https://images.vat19.com/covers/large/tricerataco-taco-holder.jpg',
-      // 'title': 'Unicron',
-      // 'description': 'loren ipsum test test text whatever there.'};
-
-
-    // pass our data to the template
-    let theCompiled = theTemp(context);
-    // add the compiled html to the page
-    $('.content-placeholder').html(theCompiled);
-
-    console.log('handlebar complete!')
-  }))
+$(() => readJson())
