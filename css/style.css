@@ -20,6 +20,9 @@ header {
 
 main {
   margin: 50px 0 0 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 h1 {
@@ -27,6 +30,11 @@ h1 {
   font-size: 50px;
   text-align: right;
   float: right;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: sans-serif;
 }
 
 img {
@@ -37,16 +45,17 @@ img {
 
 div {
   /* display: inline-block; */
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   width: 20%;
-  height: 450px;
+  /* height: 450px; */
   border: 5px solid cornflowerblue;
   border-radius: 10px;
-  margin: 2.5%;
+  /* margin: 2.5%; */
   text-align: center;
   vertical-align: center;
-  float: left;
-  outline-offset: -10px;
+  padding: 10px;
+  /* float: left; */
+  /* outline-offset: -10px; */
 }
 
 footer {
