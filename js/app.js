@@ -25,8 +25,8 @@ Creature.prototype.render = function() {
   // make a while loop that iterates on making divs until allCrits[19].
   $clone.html(creatureTemplate);
 
-  $clone.find('h2').text(this.title);
   $clone.find('img').attr('src', this.image_url);
+  $clone.find('h2').text(this.title);
   $clone.find('p').text(this.description);
 
   $clone.removeClass('clone');

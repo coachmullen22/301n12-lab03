@@ -3,6 +3,7 @@
 ===============================
 
 Driver: Karl
+
 Navigator: Jeff
 
 Description: Continue working on Lab-02 and add more features to it, like adding an additional data source (page-2.json), utilizing handlebar templating and Flexbox styling. Finally, make an image sort order the images by title and by # of horns.
